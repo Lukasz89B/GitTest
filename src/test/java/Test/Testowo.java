@@ -1,7 +1,9 @@
+package Test;
+
+import WebPages.BasePage;
+import WebPages.WyszukanaStrona;
 import org.apache.commons.io.FileUtils;
-import org.checkerframework.framework.qual.DefaultQualifier;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.*;
@@ -20,7 +22,6 @@ public class Testowo {
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         driver.get("https://www.google.pl/");
-
     }
     @Test
     public void wyszukiwanie() throws IOException {
@@ -29,8 +30,6 @@ public class Testowo {
         WyszukanaStrona wyszukanaStrona = new WyszukanaStrona(driver);
         wyszukanaStrona.grafiki("dom");
         wyszukanaStrona.grafiki("mieszkanie");
-
-
 
         File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(file, new File("C:\\Users\\lukas\\OneDrive\\Pulpit\\selenium\\skriny\\pliczek.jpg"));
