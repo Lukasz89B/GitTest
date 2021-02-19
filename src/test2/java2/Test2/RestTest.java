@@ -2,14 +2,15 @@ package Test2;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static io.restassured.RestAssured.baseURI;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
 
 public class RestTest {
@@ -64,8 +65,22 @@ public class RestTest {
                 post(baseURI).
         then().
                 statusCode(200).
-                log().all();
+                log().body().extract().path("id");
 
 
+    }
+    @Test
+    public void test_05_extraxt(){
+
+        System.out.println(given().get("https://reqres.in/api/users/2").then().extract().contentType());
+    }
+    @Test
+    public void test_06(){
+        given().get("https://reqres.in/api/unknown").then().log().body();
+    }
+    @Test
+    public void test_07_httpstatus()
+    {
+        given().get("https://reqres.in/api/unknown").then().statusCode(HttpStatus.SC_OK);
     }
 }
